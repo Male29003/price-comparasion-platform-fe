@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ShoppingCart, Search, User } from 'lucide-react';
 import Image from "next/image";
+import { useUserStore } from "@/stores/auth/userStore";
 
-export default function Header({ logined }: { logined: boolean }) {
+export default function Header() {
+    const { isLoggedIn, login, logout } = useUserStore();
     return (
         <header className="bg-gray-900 flex items-center justify-center text-white py-3 shadow-md">
             <div className="mx-15 flex justify-between items-cente">
@@ -22,31 +24,36 @@ export default function Header({ logined }: { logined: boolean }) {
             </div>
 
             <div className="flex items-center mx-5 gap-6">
-                <Link href="/cart" className="relative hover:text-yellow-400 transition">
+                <Link href="" className="relative hover:text-yellow-400 transition">
                     <ShoppingCart size={24} />
                     <span className="amount-products-in-cart absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5">
                     </span>
                 </Link>
 
-                {logined ? (
-                    <Image
-                        src="/avatar.png"
-                        alt="Avatar"
-                        width={32}
-                        height={32}
-                        className="rounded-full border border-gray-700 cursor-pointer hover:border-yellow-400 transition"
-                    />
+                {isLoggedIn ? (
+                    <>
+                        <Image
+                            src="/avatar.png"
+                            alt="Avatar"
+                            width={32}
+                            height={32}
+                            className="rounded-full border border-gray-700 cursor-pointer hover:border-yellow-400 transition"
+                        />
+                        <button onClick={logout} className="bg-yellow-400 text-black font-bold text-xs px-2 py-1 rounded-md hover:bg-yellow-300 transition">
+                            Đăng xuất
+                        </button>
+                    </>
                 ) : (
                     <div className="flex items-center gap-1">
-                        <Link href="/login" className="bg-yellow-400 text-black font-bold text-xs px-2 py-1 rounded-md hover:bg-yellow-300 transition">
+                        <button onClick={login} className="bg-yellow-400 text-black font-bold text-xs px-2 py-1 rounded-md hover:bg-yellow-300 transition">
                             Đăng nhập
-                        </Link>
-                        <Link
-                            href="/register"
+                        </button>
+                        <button
+                            onClick={logout}
                             className="hover:text-yellow-300 hover:text-yellow-300 px-2 py-1 rounded-md hover:outline-none hover:ring-2 transition text-xs"
                         >
                             Đăng ký
-                        </Link>
+                        </button>
                     </div>
                 )}
             </div>
