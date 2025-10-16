@@ -1,18 +1,54 @@
 import Link from "next/link";
+import { ShoppingCart, Search, User } from 'lucide-react';
+import Image from "next/image";
 
-export default function Header() {
+export default function Header({ logined }: { logined: boolean }) {
     return (
-        <header className="bg-gray-900 text-white px-6 py-3 flex justify-between items-center shadow-md">
-            <Link href="/" className="text-xl font-bold text-yellow-400">G2A Clone</Link>
-            <div className="flex items-center gap-4">
+        <header className="bg-gray-900 flex items-center justify-center text-white py-3 shadow-md">
+            <div className="mx-15 flex justify-between items-cente">
+                <Link href="/" className="text-2xl font-bold text-yellow-400 whitespace-nowrap">G2A Clone</Link>
+            </div>
+
+            <div className="relative flex items-center w-full max-w-md">
                 <input
                     type="text"
                     placeholder="Tìm kiếm sản phẩm..."
-                    className="px-3 py-1 rounded-md text-black w-60"
+                    className="w-full pl-3 pr-10 py-2 rounded-md bg-gray-800 text-white text-sm focus:outline-none focus:ring-2 focus:ring-yellow-200"
                 />
-                <button className="bg-yellow-400 text-black px-4 py-1 rounded-md font-medium hover:bg-yellow-300">
-                    Đăng nhập
-                </button>
+                <Search
+                    size={18}
+                    className="absolute right-3 text-gray-400 cursor-pointer hover:text-yellow-400 transition"
+                />
+            </div>
+
+            <div className="flex items-center mx-5 gap-6">
+                <Link href="/cart" className="relative hover:text-yellow-400 transition">
+                    <ShoppingCart size={24} />
+                    <span className="amount-products-in-cart absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5">
+                    </span>
+                </Link>
+
+                {logined ? (
+                    <Image
+                        src="/avatar.png"
+                        alt="Avatar"
+                        width={32}
+                        height={32}
+                        className="rounded-full border border-gray-700 cursor-pointer hover:border-yellow-400 transition"
+                    />
+                ) : (
+                    <div className="flex items-center gap-1">
+                        <Link href="/login" className="bg-yellow-400 text-black font-bold text-xs px-2 py-1 rounded-md hover:bg-yellow-300 transition">
+                            Đăng nhập
+                        </Link>
+                        <Link
+                            href="/register"
+                            className="hover:text-yellow-300 hover:text-yellow-300 px-2 py-1 rounded-md hover:outline-none hover:ring-2 transition text-xs"
+                        >
+                            Đăng ký
+                        </Link>
+                    </div>
+                )}
             </div>
         </header>
     );
