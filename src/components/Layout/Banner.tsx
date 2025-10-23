@@ -1,28 +1,27 @@
-export default function Banner() {
-    return (
-        <div className="relative overflow-hidden h-64 bg-black flex items-center justify-center">
-            {/* lớp gradient tối hai bên để tạo chiều sâu */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
+"use client";
+import { useMemo } from "react";
+import banners from "@/constants/banners.json";
 
-            {/* lớp banner chạy ngang */}
-            <div
-                className="flex animate-scroll3d"
-                style={{
-                    transform: "perspective(800px) rotateY(10deg)", // 👈 hiệu ứng cong nhẹ
-                    transformOrigin: "center",
-                }}
-            >
-                {/* Lặp 2 lần để chạy vô tận */}
-                <img
-                    src="/images/banner1.jpg"
-                    alt="Game Banner"
-                    className="h-64 object-cover select-none pointer-events-none"
-                />
-                <img
-                    src="/images/banner1.jpg"
-                    alt="Game Banner duplicate"
-                    className="h-64 object-cover select-none pointer-events-none"
-                />
+export default function Banner() {
+    const currentBanner = useMemo(() => {
+        const hour = new Date().getHours();
+        const index = hour % banners.length;
+        return banners[index];
+    }, []);
+    return (
+        <div className="relative w-screen h-64 overflow-hidden z-0">
+            <img
+                src={currentBanner}
+                alt="Game Banner"
+                className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-all duration-500"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/10" />
+
+            <div className="relative z-10 flex items-center justify-center h-full">
+                <h2 className="text-3xl font-bold text-white drop-shadow-lg">
+                    Khám phá kho game siêu khủng 🔥
+                </h2>
             </div>
         </div>
     );
