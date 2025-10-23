@@ -24,17 +24,3 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-@keyframes scroll3d {
-  0% {
-    transform: translateX(0) perspective(800px) rotateY(10deg);
-  }
-  100% {
-    transform: translateX(-50%) perspective(800px) rotateY(10deg);
-  }
-}
-
-.animate-scroll3d {
-  animation: scroll3d 25s linear infinite;
-  display: flex;
-}

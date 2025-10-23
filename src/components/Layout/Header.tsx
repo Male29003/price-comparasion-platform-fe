@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ShoppingCart, Search, User } from 'lucide-react';
+import { ShoppingCart, Search } from 'lucide-react';
 import Image from "next/image";
 import { useUserStore } from "@/stores/auth/userStore";
 
 export default function Header() {
     const { isLoggedIn, login, logout } = useUserStore();
+
     return (
         <header className="bg-gray-900 flex items-center justify-center text-white py-3 shadow-md">
             <div className="mx-15 flex justify-between items-cente">
@@ -33,7 +34,7 @@ export default function Header() {
                 {isLoggedIn ? (
                     <>
                         <Image
-                            src="/avatar.png"
+                            src="/images/user-logo.jpg"
                             alt="Avatar"
                             width={32}
                             height={32}
@@ -45,12 +46,12 @@ export default function Header() {
                     </>
                 ) : (
                     <div className="flex items-center gap-1">
-                        <button onClick={login} className="bg-yellow-400 text-black font-bold text-xs px-2 py-1 rounded-md hover:bg-yellow-300 transition">
+                        <button onClick={login} className="bg-yellow-400 text-black font-bold text-xs px-2 py-2 rounded-md hover:bg-yellow-300 transition">
                             Đăng nhập
                         </button>
                         <button
                             onClick={logout}
-                            className="hover:text-yellow-300 hover:text-yellow-300 px-2 py-1 rounded-md hover:outline-none hover:ring-2 transition text-xs"
+                            className="hover:text-yellow-300 hover:text-yellow-300 px-2 py-2 rounded-md hover:outline-none hover:ring-2 transition text-xs"
                         >
                             Đăng ký
                         </button>

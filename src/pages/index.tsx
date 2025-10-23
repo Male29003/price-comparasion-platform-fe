@@ -1,10 +1,13 @@
-import { products } from "@/data/product";
+import CategorySection from "@/components/Home/CategorySection";
+import HotDealsSection from "@/components/Home/HotDealSection";
+import TopGamesSection from "@/components/Home/TopGameSection";
 
 export default function HomePage() {
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Danh sách sản phẩm</h1>
-    </main>
-  )
-
+    <div>
+      <CategorySection />
+      <HotDealsSection />
+      <TopGamesSection />
+    </div>
+  );
 }
